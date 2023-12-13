@@ -1,0 +1,23 @@
+{
+  "name": "deltasierra",
+  "version": "1.0.0",
+  "description": "Powerful Discord Bot (Discord.js v14)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aximme/DeltaSierra.git"
+  },
+  "author": "Aximme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aximme/DeltaSierra/issues"
+  },
+  "homepage": "https://github.com/Aximme/DeltaSierra#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "fs": "^0.0.1-security"
+  }
+}
