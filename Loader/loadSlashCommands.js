@@ -27,6 +27,4 @@ module.exports = async bot => {
 
     await rest.put(Routes.applicationCommands(bot.user.id), {body: commands})
     console.log("          >> 💬 Slashs commands loaded.");
-
-    console.log(commands)
 };
