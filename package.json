@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Aximme/DeltaSierra#readme",
   "dependencies": {
+    "@discordjs/rest": "^2.2.0",
     "discord.js": "^14.14.1",
     "fs": "^0.0.1-security"
   }
