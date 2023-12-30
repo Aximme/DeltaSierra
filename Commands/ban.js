@@ -27,7 +27,7 @@ module.exports = {
             if(!user) return message.reply("Pas de membre à bannir")
             let member = message.guild.members.cache.get(user.id)
 
-            let reason = args.get("reason")
+            let reason = args.getString("reason")
             if(!reason) reason = `Aucune raison renseignée. (Ban par : ${ban_author})`
 
             // Vérifications d'usage :
@@ -39,11 +39,11 @@ module.exports = {
             if((await message.guild.bans.fetch()).get(user.id)) return message.reply("Cet utilisateur est déjà banni.")
 
             //Message envoyé en pm a l'utilisateur banni
-            try{await user.send(`Tu as été banni du serveur ${message.guild.name}. Par : ${ban_author}\n Raison : \`${reason.value}\``)} catch(err) {}
+            try{await user.send(`Tu as été banni du serveur ${message.guild.name}. Par : ${ban_author}\n Raison : \`${reason}\``)} catch(err) {}
 
             //Envoi du ban dans le salon ou a été saisi la commande
-            await message.reply(`${message.user} a banni ${user.tag}.\nRaison : \`${reason.value}\``)
-            await message.guild.bans.create(user.id, {reason: reason.value})
+            await message.reply(`${message.user} a banni ${user.tag}.\nRaison : \`${reason}\``)
+            await message.guild.bans.create(user.id, {reason: reason})
 
         } catch (err) {
             console.log(err)

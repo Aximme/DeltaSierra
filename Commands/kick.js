@@ -15,7 +15,7 @@ module.exports = {
             type:"string",
             name:"reason",
             description:"la raison de l'expulsion",
-            required:false
+            required: false
         }
     ],
 
@@ -27,10 +27,8 @@ module.exports = {
         let member = message.guild.members.cache.get(user.id)
         if(!member) return message.reply("La personne a expulser n'est pas présente sur le serveur.")
 
-        let reason = args.get("reason")
-        if(reason === null) reason = `Aucune raison renseignée. (Ban par : ${kick_author})`
-        //TODO: fix null reason
-
+        let reason = args.getString("reason")
+        if(!reason) reason = `Aucune raison fournie. Auteur du mute : ${kick_author}`
         
         // Vérifications d'usage :
         if(message.user.id === user.id) return message.reply("Impossible de te kick toi même.")
@@ -38,11 +36,11 @@ module.exports = {
         if(member && !member.kickable) return message.reply("\\:x: Erreur, impossible de kick ce membre.")
         if (member && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.reply("Impossible de kick une personne avec un rôle supérieur au tient.")
 
-        //Message envoyé en pm a l'utilisateur banni
-        try{await user.send(`Tu as été kick du serveur ${message.guild.name}. Par : ${kick_author}\n Raison : \`${reason.value}\``)} catch(err) {}
+        //Message envoyé en pm a l'utilisateur kick
+        try{await user.send(`Tu as été kick du serveur ${message.guild.name}. Par : ${kick_author}\n Raison : \`${reason}\``)} catch(err) {}
 
-        //Envoi du ban dans le salon ou a été saisi la commande
-        await message.reply(`${message.user} a kick ${user.tag}.\nRaison : \`${reason.value}\``)
+        //Envoi du kick dans le salon ou a été saisi la commande
+        await message.reply(`${message.user} a kick ${user.tag}.\nRaison : \`${reason}\``)
         await member.kick(reason)
 
         }
