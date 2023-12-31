@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "ban",
@@ -32,23 +33,63 @@ module.exports = {
 
             // Vérifications d'usage :
 
-            if(message.user.id === user.id) return message.reply("Impossible de te ban toi même.")
+            let errorMessage = '';
+
+            if (message.user.id === user.id) {
+                errorMessage = "Impossible de bannir le même discord ID que celui executant la commmande.";
+            } else if ((await message.guild.fetchOwner()).id === user.id) {
+                errorMessage = "Impossible de bannir le propriétaire du serveur.";
+            } else {
+                const member = message.guild.members.resolve(user);
+                if (member && !member.bannable) {
+                    errorMessage = "Impossible de bannir ce membre.\n>> member bannable => FALSE";
+                } else if (member && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) {
+                    errorMessage = "Impossible de bannir une personne qui a un rôle supérieur à l'utilisateur executant la commande.";
+                } else if ((await message.guild.bans.fetch()).get(user.id)) {
+                    errorMessage = "Utilisateur déja banni.";
+                }
+            }
+            //Error Embed
+            if (errorMessage !== '') {
+                const occuredError = new EmbedBuilder()
+                    .setColor(0xFFC600)
+                    .setTitle(`\\⚠️ Une erreur est survenue.`)
+                    .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : #\n\n${errorMessage}\`\`\`` })
+                    .setTimestamp()
+                    .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+
+                return message.reply({ embeds: [occuredError] });
+            }
+
+            /*if(message.user.id === user.id) return message.reply("Impossible de te ban toi même.")
             if((await message.guild.fetchOwner()).id === user.id) return message.reply("Impossible de bannir le propriétaire du serveur.")
             if(member && !member.bannable) return message.reply(":x: Erreur, impossible de bannir ce membre.")
             if (member && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.reply("Impossible de bannir une personne avec un rôle supérieur au tient.")
-            if((await message.guild.bans.fetch()).get(user.id)) return message.reply("Cet utilisateur est déjà banni.")
+            if((await message.guild.bans.fetch()).get(user.id)) return message.reply("Cet utilisateur est déjà banni.")*/
 
             //Message envoyé en pm a l'utilisateur banni
-            try{await user.send(`Tu as été banni du serveur ${message.guild.name}. Par : ${ban_author}\n Raison : \`${reason}\``)} catch(err) {}
+            const banPrivate = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle(`\\⛔ Banni de \`${message.guild.name}\` `)
+                .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${ban_author}\`\`\`` })
+                .setTimestamp()
+                .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+            try{await user.send({ embeds: [banPrivate] })} catch(err) {}
 
             //Envoi du ban dans le salon ou a été saisi la commande
-            await message.reply(`${message.user} a banni ${user.tag}.\nRaison : \`${reason}\``)
+            const banServer = new EmbedBuilder()
+                .setColor(0x0019FF)
+                .setTitle(`\\⛔ \`${ban_author}\`  à Banni  \`${user.tag}\``)
+                .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Durée #\nPERMANENT\`\`\`` })
+                .setTimestamp()
+                .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+
+            await message.reply({ embeds: [banServer] })
             await message.guild.bans.create(user.id, {reason: reason})
 
         } catch (err) {
             console.log(err)
             return message.reply("Saisie de l'utilisateur a bannir incorrecte.")
         }
-         //TODO : create embed for msg sending.
     }
 }
