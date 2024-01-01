@@ -54,9 +54,9 @@ module.exports = {
                 const occuredError = new EmbedBuilder()
                     .setColor(0xFFC600)
                     .setTitle(`\\⚠️ Une erreur est survenue.`)
-                    .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : #\n\n${errorMessage}\`\`\`` })
+                    .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\n${errorMessage}\`\`\`` })
                     .setTimestamp()
-                    .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+                    .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
                 return message.reply({ embeds: [occuredError] });
             }
@@ -73,23 +73,29 @@ module.exports = {
                 .setTitle(`\\⛔ Banni de \`${message.guild.name}\` `)
                 .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${ban_author}\`\`\`` })
                 .setTimestamp()
-                .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
             try{await user.send({ embeds: [banPrivate] })} catch(err) {}
 
             //Envoi du ban dans le salon ou a été saisi la commande
             const banServer = new EmbedBuilder()
-                .setColor(0x0019FF)
+                .setColor(0x0099FF)
                 .setTitle(`\\⛔ \`${ban_author}\`  à Banni  \`${user.tag}\``)
                 .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Durée #\nPERMANENT\`\`\`` })
                 .setTimestamp()
-                .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
             await message.reply({ embeds: [banServer] })
             await message.guild.bans.create(user.id, {reason: reason})
 
         } catch (err) {
             console.log(err)
-            return message.reply("Saisie de l'utilisateur a bannir incorrecte.")
+            const entryError = new EmbedBuilder()
+                .setColor(0xFFC600)
+                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\nLa saisie de l'utilisateur a bannir est incorrecte.\n      ${err}\`\`\`` })
+                .setTimestamp()
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
+            return message.reply({embeds: [entryError]})
         }
     }
 }

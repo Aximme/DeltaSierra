@@ -53,7 +53,7 @@ module.exports = {
                 .setTitle(`\\⚠️ Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur :\n\n${errorMessage}\`\`\`` })
                 .setTimestamp()
-                .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
             return message.reply({ embeds: [occuredError] });
         }
@@ -69,16 +69,16 @@ module.exports = {
             .setTitle(`\\🔨 Kick de \`${message.guild.name}\` `)
             .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${kick_author}\`\`\`` })
             .setTimestamp()
-            .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+            .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
         try{await user.send({ embeds: [kickPrivate] })} catch(err) {}
 
         //Envoi du kick dans le salon ou a été saisi la commande
         const kickServer = new EmbedBuilder()
-            .setColor(0x0019FF)
-            .setTitle(`\\⛔ \`${kick_author}\`  à Kick  \`${user.tag}\``)
+            .setColor(0x0099FF)
+            .setTitle(`\\🔨 \`${kick_author}\`  à Kick  \`${user.tag}\``)
             .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\`` })
             .setTimestamp()
-            .setFooter({ text: 'DeltaSierra © ', iconURL: bot.user.displayAvatarURL() });
+            .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
         await message.reply({ embeds: [kickServer] })
         await member.kick(reason)
