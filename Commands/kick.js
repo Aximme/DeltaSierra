@@ -3,20 +3,23 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "kick",
-    description: "Expulsion d'un membre",
+    description: "Expulsion d'un membre + raison.",
     permission: Discord.PermissionFlagsBits.KickMembers,
     dm: false,
+    category:"\\🛡️ •  Modération :",
     options: [
         {
             type:"user",
             name:"membre",
             description:"@ de la personne a expulser",
-            required: true
+            required: true,
+            autocomplete: false,
         }, {
             type:"string",
             name:"reason",
             description:"la raison de l'expulsion",
-            required: false
+            required: false,
+            autocomplete: false,
         }
     ],
 

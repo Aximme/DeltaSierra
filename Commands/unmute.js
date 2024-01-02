@@ -5,20 +5,23 @@ const {EmbedBuilder} = require("discord.js");
 module.exports = {
 
     name: "unmute",
-    description: "Unmute un membre du serveur.",
+    description: "Restaure la capacité de parole d'un membre.",
     permission: Discord.PermissionFlagsBits.ModerateMembers,
     dm: false,
+    category:"\\🛡️ •  Modération :",
     options: [
         {
             type:"user",
             name:"membre",
             description:"Personne visée par le unmute",
-            required:true
+            required:true,
+            autocomplete: false,
         }, {
             type:"string",
             name:"raison",
             description:"Raison du unmute",
-            required:false
+            required:false,
+            autocomplete: false,
         }
     ],
 

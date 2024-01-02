@@ -5,25 +5,29 @@ const {EmbedBuilder} = require("discord.js");
 module.exports = {
 
     name: "mute",
-    description: "Timeout / Mute un membre du serveur.",
+    description: "Timeout / Mute un membre du serveur temporairement.",
     permission: Discord.PermissionFlagsBits.ModerateMembers,
     dm: false,
+    category:"\\🛡️ •  Modération :",
     options: [
         {
             type:"user",
             name:"membre",
             description:"Personne visée par le mute",
-            required:true
+            required:true,
+            autocomplete: false,
         }, {
             type:"string",
             name:"duree",
             description:"Temps du mute",
-            required: true
+            required: true,
+            autocomplete: false,
         }, {
             type:"string",
             name:"raison",
             description:"Raison du mute",
-            required:false
+            required:false,
+            autocomplete: false,
         }
     ],
 

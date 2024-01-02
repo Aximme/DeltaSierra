@@ -3,20 +3,23 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "unban",
-    description: "Débanissement d'un membre.",
+    description: "Retire le banissement d'un membre.",
     permission: Discord.PermissionFlagsBits.BanMembers,
     dm: false,
+    category:"\\🛡️ •  Modération :",
     options: [
         {
             type:"user",
             name:"utilisateur",
             description:"@ de l'utilisateur a débannir",
-            required: true
+            required: true,
+            autocomplete: false,
         }, {
             type:"string",
             name:"reason",
             description:"Raison du débannissement",
-            required:false
+            required:false,
+            autocomplete: false,
         }
     ],
 

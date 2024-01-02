@@ -3,20 +3,23 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "ban",
-    description: "Bannissement d'un membre avec une raison.",
+    description: "Bannissement d'un membre + raison.",
     permission: Discord.PermissionFlagsBits.BanMembers,
     dm: false,
+    category:"\\🛡️ •  Modération :",
     options: [
         {
             type:"user",
             name:"membre",
             description:"@ de la personne a bannir",
-            required: true
+            required: true,
+            autocomplete: false,
     }, {
             type:"string",
             name:"reason",
             description:"la raison du bannissement",
-            required:false
+            required:false,
+            autocomplete: false,
         }
         ],
 

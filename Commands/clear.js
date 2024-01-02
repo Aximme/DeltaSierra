@@ -3,20 +3,23 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "clear",
-    description: "Supprime un nombre de message donné.",
+    description: "Supprime un nombre spécifié de messages.",
     permission: Discord.PermissionFlagsBits.BanMembers,
     dm: false,
+    category:"\\🛠️ •  Outils :",
     options: [
         {
             type:"number",
             name:"nombre",
             description:"Le nombre de messages que vous souhaitez supprimer.",
-            required:true
+            required:true,
+            autocomplete: false,
         }, {
             type:"channel",
             name:"salon",
             description:"Le salon ou vous souhaitez supprimer les messages.",
-            required: false
+            required: false,
+            autocomplete: false,
         }
     ],
 
@@ -25,7 +28,7 @@ module.exports = {
         if(!channel) channel = message.channel;
         if(channel.id !== message.channel.id && !message.guild.channels.cache.get(channel.id)) return message.reply("\\⚠️ Aucun salon trouvé !")
 
-        let number = args.getNumber("nombre")
+        let number = args.getNumber("nombre") + 1
         const numberError = new EmbedBuilder()
             .setColor(0xFFC600)
             .setTitle(`\\⚠️ Une erreur est survenue.`)
@@ -34,7 +37,7 @@ module.exports = {
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
         if(parseInt(number) <= 0 || parseInt(number) > 100) return message.reply({embeds: [numberError]})
 
-        await message.deferReply()
+        await message.deferReply({ ephemeral: true })
 
         try {
 
@@ -53,7 +56,7 @@ module.exports = {
             if(messages.length <= 0) return message.followUp({embeds: [dateError]})
             await channel.bulkDelete(messages)
 
-            await message.followUp({content:`\\🗑️ Suppression **uniquement** de \`${messages.length}\` message(s) dans le salon ${channel}.\n||Non suppression de certains messages : Les messages non supprimés datent de plus de 14 jours.||`, ephemeral:true})
+            await message.followUp({content:`\\🗑️ Suppression \*\*uniquement\*\* de \`${messages.length}\` message(s) dans le salon ${channel}.\n\|\|Non suppression de certains messages : Les messages non supprimés datent de plus de 14 jours.\|\|`, ephemeral:true})
         }
     }
 }
