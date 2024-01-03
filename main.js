@@ -8,10 +8,14 @@ const config = require("./config");
 
 bot.commands = new Map();
 bot.commands = new Discord.Collection();
+
 bot.color = "#00fbff";
 bot.owner = "aximme"
+
 
 bot.login(config.token);
 console.log("\n")
 loadEvents(bot)
 loadCommands(bot)
+
+

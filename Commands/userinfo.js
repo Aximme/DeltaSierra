@@ -4,7 +4,7 @@ const {EmbedBuilder} = require("discord.js");
 module.exports = {
     name: "userinfo",
     description: "Récupère des informations sur un utilisateur du serveur.",
-    permission: Discord.PermissionFlagsBits.BanMembers,
+    permission: "Aucune",
     dm: false,
     category:"\\📋 • Informations :",
     options: [
@@ -42,7 +42,7 @@ module.exports = {
         let checkbot = " "; if(user.bot) checkbot = "\\✔️"; else checkbot = "\\❌"
 
 
-            const userRoles = userok.roles.cache
+        const userRoles = userok.roles.cache
             .filter(role => role.id !== message.guild.id) // Exclure le rôle @everyone
             .map(role => role.toString())
             .join(', ') || 'Aucun';
@@ -57,7 +57,7 @@ module.exports = {
             > **ID :** ${user.id}
             > **Bot : ** ${checkbot}
             > **Statut :** ${userok.presence ? userok.presence.status : 'Indisponible'}
-            > **Compte créer le :** <t:${parseInt(user.createdTimestamp /1000)}:R>
+            > **Compte créer :** <t:${parseInt(user.createdTimestamp /1000)}:R>
 
             __**Informations Relatives au Serveur**__
             
