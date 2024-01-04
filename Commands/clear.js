@@ -4,7 +4,7 @@ const {EmbedBuilder} = require("discord.js");
 module.exports = {
     name: "clear",
     description: "Supprime un nombre spécifié de messages.",
-    permission: Discord.PermissionFlagsBits.BanMembers,
+    permission: Discord.PermissionFlagsBits.ManageMessages,
     dm: false,
     category:"\\🛠️ •  Outils :",
     options: [

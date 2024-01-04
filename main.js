@@ -8,6 +8,9 @@ const config = require("./config");
 
 bot.commands = new Map();
 bot.commands = new Discord.Collection();
+bot.function = {
+    createID : require("./Functions/createID")
+}
 
 bot.color = "#00fbff";
 bot.owner = "aximme"
