@@ -18,6 +18,7 @@ module.exports = {
 
         const infoEmbed = new EmbedBuilder()
             .setTitle("\\📡 Statistiques du Bot")
+            .setThumbnail(bot.user.displayAvatarURL())
             .setColor("#0099ff")
             .addFields({name:"Latence du WebSocket", value:`\`${webLatency} ms\``, inline:true},
                              {name:"Temps de Réponse du Serveur", value:`\`${endTime - startTime} ms\``, inline:true})

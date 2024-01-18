@@ -33,19 +33,19 @@ module.exports = {
         if(!member) return message.reply("pas de membre")
 
         let reason = args.getString("raison")
-        if(!reason) reason = `Aucune raison fournie. Auteur du Warn :${message.user.tag}`
+        if(!reason) reason = `Aucune raison fournie. Auteur du Warn : ${message.user.tag}`
 
         if (message.user.id === user.id) {
             errorMessage = "Impossible de Warn le même discord ID que celui executant la commmande.";
         } else if ((await message.guild.fetchOwner()).id === user.id) {
             errorMessage = "Impossible de Warn le propriétaire du serveur.";
-        } else {
+        } /*else {
             const member = message.guild.members.resolve(user);
             if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) {
                 errorMessage = "Impossible de Warn une personne qui a un rôle supérieur à l'utilisateur executant la commande.";
             } else if ((await message.guild.members.fetchMe()).roles.highest.comparePositionTo(member.roles.highest) <= 0){
                 errorMessage = "DeltaSierra ne peut pas Warn cet utilisateur.";
-            }
+            }*/
             //Error Embed
             if (errorMessage !== '') {
                 const occuredError = new EmbedBuilder()
@@ -57,7 +57,7 @@ module.exports = {
 
                 return message.reply({embeds: [occuredError]});
             }
-        }
+        //}
             let ID = await bot.function.createID("WARN");
 
             try {

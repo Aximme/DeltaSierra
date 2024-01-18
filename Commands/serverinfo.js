@@ -14,6 +14,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
             .setTitle(`\\📍 Informations du Serveur \`${message.guild.name}\``)
+            .setThumbnail(message.guild.iconURL({dynamic: true}))
             .setDescription(`
             > **Nom :**  ${message.guild.name}
             > **ID :**  ${message.guild.id}
