@@ -1,5 +1,7 @@
 const Discord = require("discord.js")
 const discordTranscripts = require('discord-html-transcripts');
+const {EmbedBuilder} = require("discord.js");
+const moment = require("moment");
 
 module.exports = async (bot, interaction) => {
 
@@ -43,26 +45,30 @@ module.exports = async (bot, interaction) => {
             modal.addComponents(firstActionRow);
 
             await interaction.showModal(modal);
-            const embed = new Discord.EmbedBuilder()
-                .setTitle("Ouvrir un ticket")
-                .setDescription("Si vous voullez ouvrir un ticket merci de cliquer ci dessous !")
+            const embed = new EmbedBuilder()
+                .setTitle("\\🎫 Systeme de Tickets")
+                .setDescription("Pour ouvrir un ticket, choisis une categorie correspondant a ton probleme ci-dessous.")
                 .setColor("#5865F2")
                 .setThumbnail(interaction.guild.iconURL({dynamic: true}))
                 .setTimestamp()
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
             const select = new Discord.StringSelectMenuBuilder()
                 .setCustomId('openticket')
                 .setPlaceholder('Faitre votre choix !')
                 .addOptions(
                     new Discord.StringSelectMenuOptionBuilder()
-                        .setLabel('Choix 1')
-                        .setValue('choix1'),
+                        .setLabel('⚠️ Signalement / Plainte')
+                        .setValue('Signalement_Plainte'),
                     new Discord.StringSelectMenuOptionBuilder()
-                        .setLabel('Choix 2')
-                        .setValue('choix2'),
+                        .setLabel('⚙️ Rapport de Bug(s)')
+                        .setValue('Rapport_Bug'),
                     new Discord.StringSelectMenuOptionBuilder()
-                        .setLabel('Choix 3')
-                        .setValue('choix3'),
+                        .setLabel('🛡️ Demande de Debanissement')
+                        .setValue('Debanissement'),
+                    new Discord.StringSelectMenuOptionBuilder()
+                        .setLabel('🧭 Autre')
+                        .setValue('Autre'),
                 );
 
             const row = new Discord.ActionRowBuilder()
@@ -75,12 +81,15 @@ module.exports = async (bot, interaction) => {
                 const sujet = reponse.fields.getTextInputValue('prblm');
 
                 const embedProbleme = new Discord.EmbedBuilder()
-                    .setTitle(`Plus d'info sur le ticket de ${interaction.user.username}`)
-                    .setDescription(`${sujet}`)
+                    .setTitle(`\\🎫 Ticket de  \`${interaction.user.username}\``)
+                    .setThumbnail(interaction.guild.iconURL({dynamic:true}))
+                    .addFields({name:"\\📌 Sujet de la demande :", value:`${interaction.values[0]}`, inline:true},{name:"\\📋 Contexte / Message Initial :", value:`\`\`\`md\n${sujet}\`\`\``, inline:true})
                     .setTimestamp()
+                    .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
+
 
                 const channel = await interaction.guild.channels.create({
-                    name: `TICKET-${interaction.user.username}`,
+                    name: `${interaction.values[0]}-${interaction.user.username}`,
                     type: 0,
                     parent: interaction.channel.parent.id,
                 })
@@ -90,7 +99,7 @@ module.exports = async (bot, interaction) => {
                 });
 
                 await channel.setTopic(interaction.user.id)
-                await reponse.reply({content: `Ticket ouvert ! ${channel}`, ephemeral: true})
+                await reponse.reply({content: `Votre Ticket a bien été ouvert ! \n${channel}`, ephemeral: true})
 
                 await channel.permissionOverwrites.create(interaction.user.id, {
                     ViewChannel: true,
@@ -147,14 +156,21 @@ module.exports = async (bot, interaction) => {
             const user = interaction.guild.members.cache.get(interaction.channel.topic);
             interaction.deferUpdate()
             const embed = new Discord.EmbedBuilder()
-                .setDescription(`Fermeture du ticket de ${user}...`)
+                .setDescription(`🗑️ Fermeture du ticket de ${user}...`)
                 .setTimestamp()
-            await interaction.message.edit({embeds: [embed], components: []})
+                .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
+
+            await interaction.message.reply({embeds: [embed], components: []})
             const transticket = await discordTranscripts.createTranscript(interaction.channel)
-            try { user.send({content: `Le ticket \`${interaction.channel.name}\` sur le serveur **${interaction.guild.name}** a été fermé avec succès!`, files: [transticket]}) } catch (err) { console.log(err);}
+            try {
+                const transcriptsLogs = 'transcripts-logs';
+                const channel = bot.channels.cache.find(ch => ch.name === transcriptsLogs);
+                await channel.send({ content: `Le ticket \`${interaction.channel.name}\` a été fermé le <t:${Math.floor(parseInt(Date.now()) / 1000)}:F>.`, files: [transticket] });
+            } catch (err) { console.log(err);}
+
             setTimeout(async() => {
                 await interaction.channel.delete()
-            }, 3000);
+            }, 4000);
         }
         if(interaction.customId === 'noclose') {
             interaction.deferUpdate()

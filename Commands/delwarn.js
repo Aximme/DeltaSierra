@@ -28,10 +28,10 @@ module.exports = {
                 async (err, req) => {
                     const notFoundEmbed = new EmbedBuilder()
                         .setColor(0xFFC600)
-                        .setTitle(`\\⚠️ Avertissement introuvable.`)
+                        .setTitle(`\\⚠️ Une erreur est survenue.`)
                         .addFields({
                             name: '‎',
-                            value: `\`\`\`diff\n- Détails : \n\nAucun avertissement trouvé avec l'ID spécifié.\`\`\``,
+                            value: `\`\`\`diff\n- Erreur survenue : \n\nAucun avertissement trouvé avec l'ID spécifié.\n\nRecherche effectuée sur : ${message.guild.name} (ID:${message.guild.id})\`\`\``,
                         })
                         .setTimestamp()
                         .setFooter({
@@ -49,12 +49,12 @@ module.exports = {
                             if (err) throw err;
 
                             const successEmbed = new EmbedBuilder()
-                                .setColor(0x00FF00)
-                                .setTitle(`\\✅ Avertissement supprimé.`)
+                                .setColor("#1a7325")
+                                .setTitle(`\\🗑️ Avertissement supprimé.`)
                                 .addFields({
                                     name: '‎',
-                                    value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${deletedWarn.warnID}\n\n# Raison #\n${deletedWarn.reason}\`\`\``,
-                                })
+                                    value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${deletedWarn.warnID}\`\`\``, inline : true},
+                                    {name:'‎', value:`\`\`\`md\n# Raison initiale du Warn #\n${deletedWarn.reason}\`\`\``,inline:true})
                                 .setTimestamp()
                                 .setFooter({
                                     text: 'DeltaSierra © 2024',

@@ -11,25 +11,29 @@ module.exports = {
 
     async run(bot, message, args, db) {
         const embed = new EmbedBuilder()
-            .setTitle("Ouvrir un ticket")
-            .setDescription("Si vous voullez ouvrir un ticket merci de cliquer ci dessous !")
+            .setTitle("\\🎫 Systeme de Tickets")
+            .setDescription("Pour ouvrir un ticket, choisis une categorie correspondant a ton probleme ci-dessous.")
             .setColor("#5865F2")
             .setThumbnail(message.guild.iconURL({dynamic: true}))
             .setTimestamp()
+            .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
         const select = new StringSelectMenuBuilder()
             .setCustomId('openticket')
-            .setPlaceholder('Faites votre choix !')
+            .setPlaceholder('Raison de l\'ouverture du Ticket')
             .addOptions(
                 new StringSelectMenuOptionBuilder()
-                    .setLabel('Choix 1')
-                    .setValue('choix1'),
+                    .setLabel('⚠️ Signalement / Plainte')
+                    .setValue('Signalement_Plainte'),
                 new StringSelectMenuOptionBuilder()
-                    .setLabel('Choix 2')
-                    .setValue('choix2'),
+                    .setLabel('⚙️ Rapport de Bug(s)')
+                    .setValue('Rapport_Bug'),
                 new StringSelectMenuOptionBuilder()
-                    .setLabel('Choix 3')
-                    .setValue('choix3'),
+                    .setLabel('🛡️ Demande de Debanissement')
+                    .setValue('Debanissement'),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('🧭 Autre')
+                    .setValue('Autre'),
             );
 
         const row = new ActionRowBuilder()

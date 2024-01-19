@@ -12,8 +12,8 @@ bot.function = {
     createID : require("./Functions/createID")
 }
 
-bot.color = "#00fbff";
-bot.owner = "aximme"
+bot.color = "#5865F2";
+bot.owner = "aximme";
 
 
 bot.login(config.token);
