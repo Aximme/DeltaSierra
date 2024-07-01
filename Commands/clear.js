@@ -6,7 +6,7 @@ module.exports = {
     description: "Supprime un nombre spécifié de messages.",
     permission: Discord.PermissionFlagsBits.ManageMessages,
     dm: false,
-    category:"\\🛠️ •  Outils :",
+    category:"<:outils:1257469842404151337>  •  Outils :",
     options: [
         {
             type:"number",
@@ -31,7 +31,7 @@ module.exports = {
         let number = args.getNumber("nombre") + 1
         const numberError = new EmbedBuilder()
             .setColor(0xFFC600)
-            .setTitle(`\\⚠️ Une erreur est survenue.`)
+            .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
             .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\nIl faut saisir un nombre entre 0 et 100 inclus.\`\`\`` })
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -42,21 +42,21 @@ module.exports = {
         try {
 
             let messages = await channel.bulkDelete(parseInt(number))
-            await message.followUp({content:`\\🗑️ Suppression de \`${messages.size}\` message(s) dans le salon ${channel}.`, ephemeral:true})
+            await message.followUp({content:`<:trashgreen:1257468128061952202>  Suppression de \`${messages.size}\` message(s) dans le salon ${channel}.`, ephemeral:true})
 
         } catch (err) {
 
             let messages = [...(await channel.messages.fetch()).filter(msg => (Date.now() - msg.createdAt) <= 1209600000).values()]
             const dateError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\nAucun message a supprimer car ils datent tous de plus de 14 jours.\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
             if(messages.length <= 0) return message.followUp({embeds: [dateError]})
             await channel.bulkDelete(messages)
 
-            await message.followUp({content:`\\🗑️ Suppression \*\*uniquement\*\* de \`${messages.length}\` message(s) dans le salon ${channel}.\n\|\|Non suppression de certains messages : Les messages non supprimés datent de plus de 14 jours.\|\|`, ephemeral:true})
+            await message.followUp({content:`<:trashred:1257466397190258819>  Suppression \*\*uniquement\*\* de \`${messages.length}\` message(s) dans le salon ${channel}.\n\|\|Non suppression de certains messages : Les messages non supprimés datent de plus de 14 jours.\|\|`, ephemeral:true})
         }
     }
 }

@@ -3,10 +3,10 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "warn",
-    description: "Avertit un utilisateur d'une faute/erreur.",
-    permission: Discord.PermissionFlagsBits.ManageMessages,
+    description: "Avertissement d\'un utilisateur.",
+    permission: Discord.PermissionFlagsBits.KickMembers,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type:"user",
@@ -39,18 +39,12 @@ module.exports = {
             errorMessage = "Impossible de Warn le même discord ID que celui executant la commmande.";
         } else if ((await message.guild.fetchOwner()).id === user.id) {
             errorMessage = "Impossible de Warn le propriétaire du serveur.";
-        } /*else {
-            const member = message.guild.members.resolve(user);
-            if (message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) {
-                errorMessage = "Impossible de Warn une personne qui a un rôle supérieur à l'utilisateur executant la commande.";
-            } else if ((await message.guild.members.fetchMe()).roles.highest.comparePositionTo(member.roles.highest) <= 0){
-                errorMessage = "DeltaSierra ne peut pas Warn cet utilisateur.";
-            }*/
+        }
             //Error Embed
             if (errorMessage !== '') {
                 const occuredError = new EmbedBuilder()
                     .setColor(0xFFC600)
-                    .setTitle(`\\⚠️ Une erreur est survenue.`)
+                    .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                     .addFields({name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\n${errorMessage}\`\`\``})
                     .setTimestamp()
                     .setFooter({text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL()});
@@ -63,10 +57,10 @@ module.exports = {
             try {
 
                 const warnPrivate = new EmbedBuilder()
-                    .setColor(0x0099FF)
-                    .setTitle(`\\⚠️ Vous avez été Warn sur le serveur : \`${message.guild.name}\` `)
-                    .addFields({ name: '‎', value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${ID}\`\`\``,inline:true},
-                        { name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\``,inline:true})
+                    .setColor("#fca04e")
+                    .setTitle(`<:warning:1257468091776897116>  Vous avez été averti sur le serveur : \`${message.guild.name}\` `)
+                    .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\``,inline:true},
+                        { name: '‎', value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${ID}\`\`\``,inline:true})
                     .setTimestamp()
                     .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
@@ -77,10 +71,10 @@ module.exports = {
 
             // Réponse sur le serveur
             const warnServer = new EmbedBuilder()
-                .setColor(0x0099FF)
-                .setTitle(`\\⚠️ \`${message.user.tag}\`  à Warn  \`${user.tag}\``)
-                .addFields({ name: '‎', value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${ID}\`\`\``,inline:true},
-                    { name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\``,inline:true})
+                .setColor("#fca04e")
+                .setTitle(`<:warning:1257468091776897116>  \`${message.user.tag}\`  à averti  \`${user.tag}\``)
+                .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\``,inline:true},
+                    { name: '‎', value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${ID}\`\`\``,inline:true})
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 

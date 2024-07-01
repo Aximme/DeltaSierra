@@ -6,9 +6,9 @@ module.exports = {
 
     name: "unmute",
     description: "Restaure la capacité de parole d'un membre.",
-    permission: Discord.PermissionFlagsBits.ModerateMembers,
+    permission: Discord.PermissionFlagsBits.KickMembers,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type:"user",
@@ -59,7 +59,7 @@ module.exports = {
         if (errorMessage !== '') {
             const occuredError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\n${errorMessage}\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -67,21 +67,10 @@ module.exports = {
             return message.reply({ embeds: [occuredError] });
         }
 
-        /*let user = args.getUser("membre");
-        if(!user) return message.reply("Pas de membre a Unmute.")
-        let member = message.guild.members.cache.get(user.id)
-        if(!member) return message.reply("Pas de membre a Unmute.")
-
-        let reason = args.getString("raison")
-        if(!reason) reason = `Aucune raison fournie. Auteur de l'Unmute : ${message.user.tag}`;
-
-        if(!member.moderatable) return message.reply("\\:x: Erreur, impossible d\'Unmute ce membre.")
-        if(message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.reply("Impossible d\'Unmute une personne avec un rôle supérieur au tient.")
-        if(!member.isCommunicationDisabled()) return message.reply("Ce membre est déjà Unmute.")*/
         //Msg en pm a l'utilisateur Unmute
         const unmutePrivate = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle(`\\🔊 Unmute de \`${message.guild.name}\` `)
+            .setColor("#1a7325")
+            .setTitle(`<:unmute:1257468289056247909>  Unmute sur \`${message.guild.name}\` `)
             .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${message.user.tag}\`\`\``})
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -89,8 +78,8 @@ module.exports = {
 
         //Envoi du Unmute dans le salon ou a été saisi la commande
         const unmuteServer = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle(`\\🔊 \`${message.user.tag}\`  à Unmute  \`${user.tag}\``)
+            .setColor("#1a7325")
+            .setTitle(`<:unmute:1257468289056247909>  \`${message.user.tag}\`  à Unmute  \`${user.tag}\``)
             .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${message.user.tag}\`\`\``})
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });

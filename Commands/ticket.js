@@ -4,9 +4,9 @@ const Discord = require("discord.js");
 module.exports = {
     name: "ticket",
     description: "Permet de configuer le système de ticket.",
-    permission: Discord.PermissionFlagsBits.SendMessages,
+    permission: Discord.PermissionFlagsBits.Administrator,
     dm: false,
-    category: "\\🛠️ •  Outils :",
+    category: "<:admin:1257466365116289184>  • Administration :",
 
 
     async run(bot, message, args, db) {

@@ -3,10 +3,10 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "lock",
-    description: "Verouille un salon.",
-    permission: Discord.PermissionFlagsBits.ManageChannels,
+    description: "Permet de verouiller un salon.",
+    permission: Discord.PermissionFlagsBits.Administrator,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:outils:1257469842404151337>  •  Outils :",
     options: [
         {
             type:"channel",
@@ -35,8 +35,8 @@ module.exports = {
 
         const alreadylock = new EmbedBuilder()
             .setColor("#fca04e")
-            .setTitle(`<:alreadylock:1197927574538563625> Le salon ${channel} est déjà Verrouillé.`)
-            .setDescription(`<:barrierred:1197929516551634974> Rôle bloqué : ${role.name}`)
+            .setTitle(`<:lock:1257466377711910972>  Le salon ${channel} est déjà Verrouillé.`)
+            .setDescription(`<:users:1257468292000514130>  Rôle bloqué : ${role.name}`)
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
@@ -48,8 +48,8 @@ module.exports = {
 
         const lock = new EmbedBuilder()
             .setColor("#fc4e4e")
-            .setTitle(`<:redlock:1197926789188702228> Le salon ${channel} a bien été Verrouillé.`)
-            .setDescription(`<:barrierred:1197929516551634974> Rôle bloqué : ${role.name}`)
+            .setTitle(`<:lock:1257466377711910972>  Le salon ${channel} a bien été Verrouillé.`)
+            .setDescription(`<:users:1257468292000514130>  Rôle bloqué : ${role.name}`)
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
         await message.reply({embeds: [lock]})

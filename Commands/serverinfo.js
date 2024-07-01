@@ -3,9 +3,9 @@ const {EmbedBuilder,  ChannelType} = require("discord.js");
 
 module.exports = {
     name: "serverinfo",
-    description: "Récupère des informations sur le serveur ou est saisie la commande",
+    description: "Informations du serveur.",
     dm: false,
-    category:"\\📋 • Informations :",
+    category:"<:info:1257466373286924288>  • Informations :",
 
 
     async run(bot, message, args) {
@@ -13,7 +13,7 @@ module.exports = {
         let guild_description = message.guild.description === null ? "Aucune renseignée" : message.guild.description;
 
         const embed = new Discord.EmbedBuilder()
-            .setTitle(`\\📍 Informations du Serveur \`${message.guild.name}\``)
+            .setTitle(`<:info:1257466373286924288>  Informations du Serveur \`${message.guild.name}\``)
             .setThumbnail(message.guild.iconURL({dynamic: true}))
             .setDescription(`
             > **Nom :**  ${message.guild.name}
@@ -24,12 +24,12 @@ module.exports = {
             > **Créer :**  <t:${parseInt(message.guild.createdTimestamp /1000)}:R>
             > **Niveau de Protection :**  \`${message.guild.verificationLevel}\`
             
-            \\👤 • **__Informations Utilisateurs :__**
+            <:user:1257466404211265576>  • **__Informations Utilisateurs :__**
 
-            > \\🤖 **Bots :**  \`${message.guild.members.cache.filter(m => m.user.bot).size}\`
-            > \\👥 **Total Membres :**  \`${message.guild.memberCount}\`
+            > <:bot:1257466368123732008> **Bots :**  \`${message.guild.members.cache.filter(m => m.user.bot).size}\`
+            > <:users:1257468292000514130>  **Total Membres :**  \`${message.guild.memberCount}\`
 
-            \\📝 • **__Autres Information :__**
+            <:moreplus:1257466379133648966>  • **__Autres Information :__**
 
             > Catégorie(s) : \`${message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildCategory).size}\`  |  Stage(s) :  \`${message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildStageVoice).size}\`  |  Vocaux :  \`${message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice).size}\`  |  Textuel(s) :  \`${message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).size}\`
             > Rôles : \`${message.guild.roles.cache.size}\`  |  Emoji(s) : \`${message.guild.emojis.cache.size}\`

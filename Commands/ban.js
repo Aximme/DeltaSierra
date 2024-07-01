@@ -6,7 +6,7 @@ module.exports = {
     description: "Bannissement d'un membre + raison.",
     permission: Discord.PermissionFlagsBits.BanMembers,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type:"user",
@@ -56,7 +56,7 @@ module.exports = {
             if (errorMessage !== '') {
                 const occuredError = new EmbedBuilder()
                     .setColor(0xFFC600)
-                    .setTitle(`\\⚠️ Une erreur est survenue.`)
+                    .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                     .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\n${errorMessage}\`\`\`` })
                     .setTimestamp()
                     .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -64,25 +64,19 @@ module.exports = {
                 return message.reply({ embeds: [occuredError] });
             }
 
-            /*if(message.user.id === user.id) return message.reply("Impossible de te ban toi même.")
-            if((await message.guild.fetchOwner()).id === user.id) return message.reply("Impossible de bannir le propriétaire du serveur.")
-            if(member && !member.bannable) return message.reply(":x: Erreur, impossible de bannir ce membre.")
-            if (member && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.reply("Impossible de bannir une personne avec un rôle supérieur au tient.")
-            if((await message.guild.bans.fetch()).get(user.id)) return message.reply("Cet utilisateur est déjà banni.")*/
-
             //Message envoyé en pm a l'utilisateur banni
             const banPrivate = new EmbedBuilder()
-                .setColor(0x0099FF)
-                .setTitle(`\\⛔ Banni de \`${message.guild.name}\` `)
-                .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${ban_author}\`\`\`` })
+                .setColor("#cc0000")
+                .setTitle(`<:ban:1257466366827429941>  Banni de \`${message.guild.name}\` `)
+                .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderateur #\n${ban_author}\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
             try{await user.send({ embeds: [banPrivate] })} catch(err) {}
 
             //Envoi du ban dans le salon ou a été saisi la commande
             const banServer = new EmbedBuilder()
-                .setColor(0x0099FF)
-                .setTitle(`\\⛔ \`${ban_author}\`  à Banni  \`${user.tag}\``)
+                .setColor("#cc0000")
+                .setTitle(`<:ban:1257466366827429941>  \`${ban_author}\`  à Banni  \`${user.tag}\``)
                 .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Durée #\nPERMANENT\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -94,7 +88,7 @@ module.exports = {
             console.log(err)
             const entryError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\nLa saisie de l'utilisateur a bannir est incorrecte.\n      ${err}\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });

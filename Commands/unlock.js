@@ -3,10 +3,10 @@ const {EmbedBuilder} = require("discord.js");
 
 module.exports = {
     name: "unlock",
-    description: "Devérouille un salon.",
-    permission: Discord.PermissionFlagsBits.ManageChannels,
+    description: "Permet de devérouiller un salon.",
+    permission: Discord.PermissionFlagsBits.Administrator,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:outils:1257469842404151337>  •  Outils :",
     options: [
         {
             type:"channel",
@@ -35,9 +35,9 @@ module.exports = {
 
 
         const alreadyunlock = new EmbedBuilder()
-            .setColor("#8efc6d")
-            .setTitle(`<:greenunlock:1197926787959754832> Le salon ${channel} est déjà Déverrouillé.`)
-            .setDescription(`<:greenbarrier:1197930858368204811> Rôle Déverrouillé : ${role.name}`)
+            .setColor("#fca04e")
+            .setTitle(`<:unlock:1257466400977588286>  Le salon ${channel} est déjà Déverrouillé.`)
+            .setDescription(`<:users:1257468292000514130>  Rôle Déverrouillé : ${role.name}`)
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 
@@ -49,8 +49,8 @@ module.exports = {
 
         const unlock = new EmbedBuilder()
             .setColor("#8efc6d")
-            .setTitle(`<:greenunlock:1197926787959754832> Le salon ${channel} a bien été Déverrouillé.`)
-            .setDescription(`<:greenbarrier:1197930858368204811> Rôle Déverrouillé : ${role.name}`)
+            .setTitle(`<:unlock:1257466400977588286>  Le salon ${channel} a bien été Déverrouillé.`)
+            .setDescription(`<:users:1257468292000514130>  Rôle Déverrouillé : ${role.name}`)
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
 

@@ -6,7 +6,7 @@ module.exports = {
     description: "Expulsion d'un membre + raison.",
     permission: Discord.PermissionFlagsBits.KickMembers,
     dm: false,
-    category:"\\🛡️ •  Modération :",
+    category:"<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type:"user",
@@ -32,7 +32,7 @@ module.exports = {
         if(!member) return message.reply("La personne a expulser n'est pas présente sur le serveur.")
 
         let reason = args.getString("reason")
-        if(!reason) reason = `Aucune raison fournie. Auteur du mute : ${kick_author}`
+        if(!reason) reason = `Aucune raison fournie. Auteur du kick : ${kick_author}`
         
         // Vérifications d'usage :
         let errorMessage = '';
@@ -53,7 +53,7 @@ module.exports = {
         if (errorMessage !== '') {
             const occuredError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur :\n\n${errorMessage}\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -61,24 +61,19 @@ module.exports = {
             return message.reply({ embeds: [occuredError] });
         }
 
-        /*if(message.user.id === user.id) return message.reply("Impossible de Kick un discord ID identique a celui de l'utilisateur executant la commande.")
-        if((await message.guild.fetchOwner()).id === user.id) return message.reply("Impossible de kick le propriétaire du serveur.")
-        if(member && !member.kickable) return message.reply("\\:x: Erreur, impossible de kick ce membre.")
-        if (member && message.member.roles.highest.comparePositionTo(member.roles.highest) <= 0) return message.reply("Impossible de kick une personne avec un rôle supérieur au tient.")*/
-
         //Message envoyé en pm a l'utilisateur kick
         const kickPrivate = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle(`\\🔨 Kick de \`${message.guild.name}\` `)
-            .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderator #\n${kick_author}\`\`\`` })
+            .setColor("#ffb522")
+            .setTitle(`<:kick:1257466374888886344>  Kick de \`${message.guild.name}\` `)
+            .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\n\n# Moderateur #\n${kick_author}\`\`\`` })
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
         try{await user.send({ embeds: [kickPrivate] })} catch(err) {}
 
         //Envoi du kick dans le salon ou a été saisi la commande
         const kickServer = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle(`\\🔨 \`${kick_author}\`  à Kick  \`${user.tag}\``)
+            .setColor("#ffb522")
+            .setTitle(`<:kick:1257466374888886344>  \`${kick_author}\`  à Kick  \`${user.tag}\``)
             .addFields({ name: '‎', value: `\`\`\`md\n# Raison #\n${reason}\`\`\`` })
             .setTimestamp()
             .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });

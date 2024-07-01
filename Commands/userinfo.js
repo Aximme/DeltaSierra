@@ -6,7 +6,7 @@ module.exports = {
     description: "Récupère des informations sur un utilisateur du serveur.",
     permission: "Aucune",
     dm: false,
-    category:"\\📋 • Informations :",
+    category:"<:info:1257466373286924288>  • Informations :",
     options: [
         {
             type:"user",
@@ -25,13 +25,13 @@ module.exports = {
         let user = args.getUser("membre");
         let userok = await message.guild.members.fetch(user.id).catch(() => null);
         if (!user) {
-            errorMessage = "Le membre à mute n'a pas été trouvé.\nVérifiez les paramètres entrés et réessayez.";
+            errorMessage = "Le membre à afficher n'a pas été trouvé.\nVérifiez les paramètres entrés et réessayez.";
         }
 
         if (errorMessage !== '') {
             const occuredError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\n${errorMessage}\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -49,7 +49,7 @@ module.exports = {
 
         const userInfoEmbed = new EmbedBuilder()
             .setColor('#0099ff')
-            .setTitle('\\👥 Informations Utilisateur')
+            .setTitle('<:users:1257468292000514130>  Informations Utilisateur')
             .setThumbnail(userok.displayAvatarURL())
             .setDescription(`
             > **Nom d\'utilisateur :** ${user.tag} | ${user.toString()}

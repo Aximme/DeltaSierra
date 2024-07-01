@@ -4,9 +4,9 @@ const { EmbedBuilder } = require("discord.js");
 module.exports = {
     name: "delwarn",
     description: "Supprime un avertissement en utilisant son WarnID.",
-    permission: Discord.PermissionFlagsBits.ManageMessages,
+    permission: Discord.PermissionFlagsBits.Administrator,
     dm: false,
-    category: "\\🛡️ • Modération :",
+    category: "<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type: "string",
@@ -28,7 +28,7 @@ module.exports = {
                 async (err, req) => {
                     const notFoundEmbed = new EmbedBuilder()
                         .setColor(0xFFC600)
-                        .setTitle(`\\⚠️ Une erreur est survenue.`)
+                        .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                         .addFields({
                             name: '‎',
                             value: `\`\`\`diff\n- Erreur survenue : \n\nAucun avertissement trouvé avec l'ID spécifié.\n\nRecherche effectuée sur : ${message.guild.name} (ID:${message.guild.id})\`\`\``,
@@ -50,7 +50,7 @@ module.exports = {
 
                             const successEmbed = new EmbedBuilder()
                                 .setColor("#1a7325")
-                                .setTitle(`\\🗑️ Avertissement supprimé.`)
+                                .setTitle(`<:trashgreen:1257468128061952202>  Avertissement Supprimé`)
                                 .addFields({
                                     name: '‎',
                                     value: `\`\`\`md\n# Moderator #\n${message.user.tag}\n\n# WarnID #\n${deletedWarn.warnID}\`\`\``, inline : true},

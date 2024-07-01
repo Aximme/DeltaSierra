@@ -7,7 +7,7 @@ module.exports = {
     description: "Affiche une liste de toutes les commandes disponibles.",
     permission: "Aucune",
     dm: true,
-    category:"\\📋 • Informations :",
+    category:"<:info:1257466373286924288>  • Informations :",
     options: [
         {
             type:"string",
@@ -26,7 +26,7 @@ module.exports = {
 
             const occuredError = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>   Une erreur est survenue.`)
                 .addFields({ name: '‎', value: `\`\`\`diff\n- Détails de l'erreur :\n\nLa commande saisie n'a pas été trouvée. Veuillez réessayer.\`\`\`` })
                 .setTimestamp()
                 .setFooter({ text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL() });
@@ -42,9 +42,9 @@ module.exports = {
 
             let helpEmbed = new Discord.EmbedBuilder()
                 .setColor(bot.color)
-                .setTitle(`\\⚔️ Menu des Commandes de DeltaSierra \\⚔️`)
+                .setTitle(`⚔️ Menu des Commandes de DeltaSierra ⚔️`)
                 .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
-                .setDescription(`Des question, suggestions ou rapport de bugs. Merci d'ouvrir une request ici : [GitHub du Bot.](https://github.com/Aximme/DeltaSierra)`)
+                .setDescription(`Des question, suggestions ou rapport de bugs. Merci d'ouvrir une request ici : [GitHub de l\'application.](https://github.com/Aximme/DeltaSierra)`)
                 .addFields({name:`‎`, value:`Le bot regroupes un nombre de \`${bot.commands.size}\` commandes. Réparties en \`${categories.length}\` catégories.`},
                 { name: '\u200B', value: '\u200B' })
                 .setTimestamp()
@@ -63,7 +63,7 @@ module.exports = {
 
             let focusHelp = new Discord.EmbedBuilder()
                 .setColor(bot.color)
-                .setTitle(`\\📌 Détails de la Commande - \`${command.name}\``)
+                .setTitle(`<:pinned:1257468514378448987> Détails de la Commande - \`${command.name}\``)
                 .setThumbnail(bot.user.displayAvatarURL({dynamic: true}))
                 .addFields({ name: '‎', value: `\`\`\`md\n# Description : #\n${command.description}\n\n# Permissions requises : #\n${typeof command.permission !== "bigint" ? command.permission : new Discord.PermissionsBitField(command.permission).toArray(false)}\`\`\``,inline:true},
                                  { name: '‎', value: `\`\`\`md\n# Commande en DM : #\n${command.dm ? "Activées" : "Désactivées"}\n\n# Catégorie : #\n${cut_catego}\`\`\``,inline:true})

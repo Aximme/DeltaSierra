@@ -5,9 +5,9 @@ module.exports = {
 
     name: "warnlist",
     description: "Affiche les warns d'un utilisateur.",
-    permission: Discord.PermissionFlagsBits.ManageMessages,
+    permission: Discord.PermissionFlagsBits.KickMembers,
     dm: false,
-    category: "\\🛡️ •  Modération :",
+    category: "<:shield2:1257466393616449586>  •  Modération :",
     options: [
         {
             type: "user",
@@ -29,7 +29,7 @@ module.exports = {
 
             const noWarns = new EmbedBuilder()
                 .setColor(0xFFC600)
-                .setTitle(`\\⚠️ Une erreur est survenue.`)
+                .setTitle(`<:warning:1257468091776897116>  Une erreur est survenue.`)
                 .addFields({name: '‎', value: `\`\`\`diff\n- Détails de l'erreur : \n\nL'utilisateur spécifié n'a aucun Warns.\`\`\``})
                 .setTimestamp()
                 .setFooter({text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL()});
@@ -40,7 +40,7 @@ module.exports = {
 
             let allwarnsEmbed = new Discord.EmbedBuilder()
                 .setColor("#F58F2A")
-                .setTitle(`\\📋 Liste des Warns de \`${user.tag}\``)
+                .setTitle(`<:folder:1257466371609202800>  Liste des Avertissements de \`${user.tag}\``)
                 .setThumbnail(user.displayAvatarURL({dynamic:true}))
                 .setTimestamp()
                 .setFooter({text: 'DeltaSierra © 2024', iconURL: bot.user.displayAvatarURL()})
