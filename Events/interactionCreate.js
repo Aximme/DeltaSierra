@@ -15,12 +15,24 @@ module.exports = async (bot, interaction) => {
             await interaction.respond(entry === "" ? bot.commands.map(cmd => ({name:cmd.name, value: cmd.name})): choices.map(choice => ({name:choice.name, value:choice.name})))
         }
 
+        if(interaction.commandName ==="setantispam") {
+
+            let choices = ["on", "off"]
+            let sortie = choices.filter(c => c.includes(entry))
+            await interaction.respond(entry === "" ? sortie.map(c => ({name: c, value: c})) : sortie.map(c => ({
+                name: c,
+                value: c
+            })))
+        }
+
+
         /*if(interaction.commandName ==="setantiraid") {
 
             let choices = ["on","off"]
             let sortie = choices.filter(c => c.includes(entry))
             await interaction.respond(entry === "" ? sortie.map(c => ({name: c, value: c})) : sortie.map(c => ({name: c, value: c})))
         }*/
+
 
         if(interaction.commandName ==="setstatus") {
 

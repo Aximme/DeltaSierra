@@ -59,7 +59,9 @@ module.exports = {
             await message.reply({embeds: [helpEmbed]})
         } else {
             catego = command.category
-            cut_catego = catego.slice(1, -1);
+            let parts = catego.split('•');
+            cut_catego = parts[1].trim().slice(0, -1);
+
 
             let focusHelp = new Discord.EmbedBuilder()
                 .setColor(bot.color)
